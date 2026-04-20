@@ -17,6 +17,8 @@ Repo này đã có sẵn bộ Dockerfile + docker compose để chạy Zabbix v�
    cp .env.example .env
    ```
 
+   Sau đó đổi `POSTGRES_PASSWORD` trong `.env` sang mật khẩu mạnh của bạn.
+
 2. Khởi động:
 
    ```bash
