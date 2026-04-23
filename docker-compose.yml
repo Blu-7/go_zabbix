@@ -53,5 +53,17 @@ services:
     ports:
       - "${ZBX_WEB_PORT}:8080"
 
+  tenant-provisioner-go:
+    build:
+      context: .
+      dockerfile: docker/provisioner-go/Dockerfile
+    container_name: tenant-provisioner-go
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    depends_on:
+      zabbix-web:
+        condition: service_started
+
 volumes:
   postgres_data:
