@@ -32,6 +32,21 @@ services:
     ports:
       - "${ZBX_SERVER_PORT}:10051"
 
+  zabbix-agent2:
+    image: zabbix/zabbix-agent2:alpine-7.0-latest
+    container_name: zbx-agent2
+    restart: unless-stopped
+    depends_on:
+      zabbix-server:
+        condition: service_started
+    network_mode: "service:zabbix-server"
+    pid: "service:zabbix-server"
+    environment:
+      ZBX_HOSTNAME: ${ZBX_AGENT2_HOSTNAME:-Zabbix server}
+      ZBX_SERVER_HOST: ${ZBX_AGENT2_SERVER_HOST:-127.0.0.1}
+      ZBX_SERVER_ACTIVE: ${ZBX_AGENT2_SERVER_ACTIVE:-127.0.0.1}
+      ZBX_LISTENPORT: ${ZBX_AGENT2_LISTENPORT:-10050}
+
   zabbix-web:
     build:
       context: .

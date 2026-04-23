@@ -10,7 +10,7 @@ Stack này chạy Zabbix với PostgreSQL và một provisioner viết bằng Go
 - `docker/zabbix-server/Dockerfile`: image Zabbix Server.
 - `docker/zabbix-web/Dockerfile`: image Zabbix Web.
 - `docker/provisioner-go/Dockerfile`: image Go provisioner.
-- `docker-compose.yml`: `postgres`, `zabbix-server`, `zabbix-web`, `tenant-provisioner-go`.
+- `docker-compose.yml`: `postgres`, `zabbix-server`, `zabbix-agent2`, `zabbix-web`, `tenant-provisioner-go`.
 - `.env.example`: biến môi trường mẫu.
 
 ## Cách chạy
@@ -47,6 +47,8 @@ Stack này chạy Zabbix với PostgreSQL và một provisioner viết bằng Go
   ```
 
 - Nếu `TENANT_API_KEY` rỗng, service sẽ fail ngay khi khởi động.
+
+- `zabbix-agent2` chạy dạng sidecar chung network/pid namespace với `zabbix-server`, dùng hostname mặc định `Zabbix server` để khớp host mặc định trong Zabbix.
 
 ## Dừng hệ thống
 
